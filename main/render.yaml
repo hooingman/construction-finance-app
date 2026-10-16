@@ -1,0 +1,19 @@
+# Render Blueprint 생성 시 Blueprint Path를 main/render.yaml로 지정합니다.
+services:
+  - type: web
+    name: construction-finance-app
+    runtime: python
+    plan: free
+    rootDir: main/construction_company_proj
+    buildCommand: python -m pip install -r requirements.txt
+    startCommand: bash start.sh
+    healthCheckPath: /_stcore/health
+    envVars:
+      - key: PYTHON_VERSION
+        value: "3.12.3"
+      - key: OPENBLAS_NUM_THREADS
+        value: "1"
+      - key: OMP_NUM_THREADS
+        value: "1"
+      - key: STREAMLIT_BROWSER_GATHER_USAGE_STATS
+        value: "false"
