@@ -48,7 +48,7 @@ def predict_ml(df, company, base_year):
     train = data[data.target.notna() & data.target_year.le(base_year)]
     current = data[data.corp_name.eq(company) & data.year.eq(base_year)]
     if len(train)<60 or train.target_year.nunique()<3:
-        return {"ok":False,"message":"회귀 학습에 필요한 과거 자료가 부족합니다. 기준 연도를 늦춰 주세요."}
+        return {"ok":False,"message":"선택한 연도까지의 자료가 부족해 예측할 수 없습니다. 더 최근 연도를 선택해 주세요."}
     if current.empty or current[FEATURES].notna().sum(axis=1).iloc[0]<5:
         return {"ok":False,"message":"선택 기업의 예측 입력 자료가 부족합니다."}
     model = new_model().fit(train[FEATURES],train.target)
